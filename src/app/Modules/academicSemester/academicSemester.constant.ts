@@ -22,7 +22,7 @@ export const months: T_Month[] = [
 
 export const academicSemesterName: T_AcademicName[] = [
   'Autumn',
-  'Summmer',
+  'Summer',
   'Fall',
 ];
 export const academicSemesterCode: T_AcademicCode[] = ['01', '02', '03'];

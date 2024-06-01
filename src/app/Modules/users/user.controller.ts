@@ -8,8 +8,6 @@ import catchAsync from '../../utils/catchAsync';
 const createStudent: RequestHandler = catchAsync(async (req, res) => {
   const { password, Student: studentData } = req.body;
 
-  console.log(studentData, password);
-
   const result = await userService.createSudentIntoDB(password, studentData);
 
   sendResponse(res, {

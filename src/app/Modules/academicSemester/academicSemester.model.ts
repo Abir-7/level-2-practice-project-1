@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import mongoose, { model, Schema } from 'mongoose';
 import { T_AcademicSemester } from './academicSemester.interface';
 import {
   academicSemesterCode,
@@ -46,7 +46,7 @@ academicSemesterSchema.pre('save', async function (next) {
   next();
 });
 
-export const AcademicSemester = model<T_AcademicSemester>(
+export const AcademicSemester = mongoose.model<T_AcademicSemester>(
   'AcademicSemester',
   academicSemesterSchema,
 );
