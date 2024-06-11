@@ -116,6 +116,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
         },
         message: 'Email not valid',
       },
+      unique: true,
     },
     dateOfBrith: { type: String },
     contactNo: { type: String, required: true },
@@ -139,16 +140,20 @@ const studentSchema = new Schema<TStudent, StudentModel>(
     },
     profileImg: { type: String },
     academicSemester: { type: Schema.Types.ObjectId, ref: 'AcademicSemester' },
+    academicDepartment: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicDepartment',
+    },
     isDeleted: {
       type: Boolean,
       default: false,
     },
   },
-  { toJSON: { virtuals: true } },
+  { toJSON: { virtuals: true }, timestamps: true },
 );
 
 studentSchema.virtual('fullName').get(function () {
-  return `${this.name.firstName} ${this.name.middleName} ${this.name.lastName}`;
+  return `${this?.name?.firstName} ${this?.name?.middleName} ${this?.name?.lastName}`;
 });
 
 studentSchema.pre('find', async function (next) {
