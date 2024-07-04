@@ -34,7 +34,6 @@ const getSingleCoursesFromDb = async (id: string) => {
 };
 
 const updateCoursesFromDb = async (id: string, payload: Partial<T_Course>) => {
-  console.log(id);
   const { preRequisiteCourses, ...courseRenainingData } = payload;
 
   const session = await mongoose.startSession();
@@ -115,7 +114,6 @@ const updateCoursesFromDb = async (id: string, payload: Partial<T_Course>) => {
 };
 
 const deleteCoursesFromDb = async (id: string) => {
-  console.log('gg');
   const result = await Course.findByIdAndUpdate(
     id,
     {
@@ -130,7 +128,6 @@ const assignCoursetoFaculties = async (
   id: string,
   data: Partial<T_CourseFaculty>,
 ) => {
-  console.log('gg', id, data);
   const result = await CourseFaculty.findByIdAndUpdate(
     id,
     {
@@ -139,7 +136,6 @@ const assignCoursetoFaculties = async (
     },
     { upsert: true, new: true },
   );
-  console.log('gg', id, data, result);
   return result;
 };
 

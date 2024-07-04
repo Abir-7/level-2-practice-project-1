@@ -25,7 +25,7 @@ const updateSingleAcademicSemesterFromDB = async (
   id: string,
   data: Partial<T_AcademicSemester>,
 ) => {
-  console.log(id);
+  //console.log(id);
   const filter = { _id: id };
   const update = data;
 
@@ -42,7 +42,7 @@ const updateSingleAcademicSemesterFromDB = async (
   if (!result) {
     throw new Error(`AcademicSemester with ID not found`);
   }
-  console.log(result);
+  //console.log(result);
   return result;
 };
 

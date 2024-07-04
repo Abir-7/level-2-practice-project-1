@@ -20,7 +20,6 @@ const getAllFacultiesFromDB = async (query: Record<string, unknown>) => {
     .paginateMethod()
     .fieldLimitMethod();
   const result = await facultyQuery.modelQuery;
-  console.log(result, facultyQuery);
   return result;
 };
 

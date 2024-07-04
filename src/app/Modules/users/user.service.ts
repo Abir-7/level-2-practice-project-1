@@ -1,11 +1,10 @@
-import { z } from 'zod';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import config from '../../config';
 import { TStudent } from '../students/student.interface';
 import { Student } from '../students/student.model';
 import { TUser } from './user.interface';
 
 import { User } from './user.model';
-import { studentValidationSchema } from '../students/student.validation';
 
 import { AcademicSemester } from '../academicSemester/academicSemester.model';
 import {
@@ -32,6 +31,7 @@ const createSudentIntoDB = async (password: string, studentData: TStudent) => {
   userData.password = password || (config.default_password as string);
   //set student role
   userData.role = 'student';
+  userData.email = studentData.email;
   //find semester
   const semester = await AcademicSemester.findById({
     _id: studentData.academicSemester,
@@ -69,7 +69,6 @@ const createSudentIntoDB = async (password: string, studentData: TStudent) => {
     await session.endSession();
     return newStudent;
   } catch (error) {
-    console.log(error);
     await session.abortTransaction();
     await session.endSession();
     throw new AppError(
@@ -89,6 +88,7 @@ const createFacultyIntoDB = async (password: string, payload: T_Faculty) => {
 
   //set student role
   userData.role = 'faculty';
+  userData.email = payload.email;
 
   // find academic department info
   const academicDepartment = await AcademicDepartment.findById(
@@ -133,6 +133,7 @@ const createFacultyIntoDB = async (password: string, payload: T_Faculty) => {
     await session.endSession();
 
     return newFaculty;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     await session.abortTransaction();
     await session.endSession();
@@ -149,6 +150,7 @@ const createAdminIntoDB = async (password: string, payload: TAdmin) => {
 
   //set student role
   userData.role = 'admin';
+  userData.email = payload.email;
 
   const session = await mongoose.startSession();
 

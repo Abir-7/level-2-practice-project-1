@@ -157,19 +157,16 @@ studentSchema.virtual('fullName').get(function () {
 });
 
 studentSchema.pre('find', async function (next) {
-  //console.log(this, 'pre hook: we will save the data');
   this.find({ isDeleted: { $ne: true } });
   next();
 });
 
 studentSchema.pre('find', async function (next) {
-  //console.log(this, 'pre hook: we will save the data');
   this.find({ isDeleted: { $ne: true } });
   next();
 });
 
 studentSchema.pre('findOne', async function (next) {
-  //console.log(this, 'pre hook: we will save the data');
   this.find({ isDeleted: { $ne: true } });
   next();
 });

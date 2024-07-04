@@ -7,7 +7,7 @@ import httpStatus from 'http-status';
 const createAcademicDepartment: RequestHandler = catchAsync(
   async (req, res, next) => {
     const data = req.body;
-    console.log(data);
+    //console.log(data);
     const result =
       await AcademicDepartmentService.createAcademicDepartmentIntoDb(data);
 

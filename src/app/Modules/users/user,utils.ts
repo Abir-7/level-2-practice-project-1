@@ -53,7 +53,6 @@ export const generateFacultyId = async () => {
   const lastFacultyId = await findLastFacultyId();
 
   if (lastFacultyId) {
-    console.log(lastFacultyId, 'ff');
     currentId = lastFacultyId;
   }
 

@@ -70,6 +70,7 @@ const getStudentDataFromDB = async (query: Record<string, unknown>) => {
 
   const studentQuery = new QueryBuilder(
     Student.find()
+      .populate('user')
       .populate('academicSemester')
       .populate({
         path: 'academicDepartment',
@@ -90,7 +91,7 @@ const getStudentDataFromDB = async (query: Record<string, unknown>) => {
 
 const getSingleStudentDataFromDB = async (id: string) => {
   //const result = await Student.findOne({ id });
-  console.log(id);
+
   const result = await Student.findById(id)
     .populate('academicSemester')
     .populate({
@@ -104,7 +105,6 @@ const getSingleStudentDataFromDB = async (id: string) => {
 
 const updateStudentDataIntoDB = async (id: string, data: Partial<TStudent>) => {
   //const result = await Student.findOne({ id });
-  console.log(id, 'gg');
 
   const { name, guardian, localGuardian, ...remainingStudentData } = data;
 
@@ -126,7 +126,7 @@ const updateStudentDataIntoDB = async (id: string, data: Partial<TStudent>) => {
     for (const [key, value] of Object.entries(localGuardian))
       modifiedUpdatedData[`localGuardian.${key}`] = value;
   }
-  console.log(modifiedUpdatedData);
+  //console.log(modifiedUpdatedData);
   const result = await Student.findByIdAndUpdate(id, modifiedUpdatedData, {
     new: true,
   });

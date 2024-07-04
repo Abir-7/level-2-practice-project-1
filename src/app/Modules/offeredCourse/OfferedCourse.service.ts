@@ -84,13 +84,12 @@ const createOfferedCourseIntoDB = async (payload: TOfferedCourse) => {
     throw new AppError(httpStatus.NOT_FOUND, 'Faculty not found !', '');
   }
 
-  console.log(academicFaculty, academicDepartment);
   // check if the department is belong to the  faculty
   const isDepartmentBelongToFaculty = await AcademicDepartment.findOne({
     _id: academicDepartment,
     academicfaculty: academicFaculty,
   });
-  console.log(isDepartmentBelongToFaculty, 'gg');
+
   if (!isDepartmentBelongToFaculty) {
     throw new AppError(
       httpStatus.BAD_REQUEST,
